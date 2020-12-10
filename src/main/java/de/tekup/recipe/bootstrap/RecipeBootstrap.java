@@ -15,6 +15,7 @@ import de.tekup.recipe.data.entities.Difficulty;
 import de.tekup.recipe.data.entities.Ingredient;
 import de.tekup.recipe.data.entities.Recipe;
 import de.tekup.recipe.data.entities.UnitOfMeasure;
+import de.tekup.recipe.data.repositories.IngredientRepository;
 import de.tekup.recipe.data.repositories.RecipeRepository;
 import de.tekup.recipe.data.repositories.UnitOfMeasureRepository;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
   
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final IngredientRepository ingredientRepository;
 
    
     @Override
@@ -153,6 +155,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.addIngredient(new Ingredient("freshly grated black pepper", 2.0, dashUom));
         guacRecipe.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", 0.5, eachUom));
 
+        ingredientRepository.saveAll(guacRecipe.getIngredients());
         
 
         guacRecipe.setServings(4);
@@ -201,7 +204,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.addIngredient(new Ingredient("cup sour cream thinned with 1/4 cup milk", 4.0, cupsUom));
         tacosRecipe.addIngredient(new Ingredient("lime, cut into wedges", 4.0, eachUom));
 
-
+        ingredientRepository.saveAll(tacosRecipe.getIngredients());
 
         tacosRecipe.setServings(4);
       
