@@ -21,9 +21,20 @@ public class Ingredient {
 	private Double amount;
 	
 	@OneToOne
-	private UnitOfMesure uom;
+	private UnitOfMeasure uom;
 	
 	@ManyToOne
 	private Recipe recipe;
+
+	public Ingredient(String description, Double amount, UnitOfMeasure uom) {
+		super();
+		this.description = description;
+		this.amount = amount;
+		this.uom = uom;
+	}
+
+	
+	
+	
 
 }
