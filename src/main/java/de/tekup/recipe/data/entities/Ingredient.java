@@ -8,9 +8,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
+@ToString(exclude = "recipe")
+@NoArgsConstructor
 public class Ingredient {
 	
 	@Id

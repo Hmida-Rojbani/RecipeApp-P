@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import de.tekup.recipe.data.entities.Recipe;
 import de.tekup.recipe.data.repositories.RecipeRepository;
+import de.tekup.recipe.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -17,6 +18,12 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public List<Recipe> getRecipes() {
 		return reposRecipe.findAll();
+	}
+
+	@Override
+	public Recipe getRecipeById(long id) {
+		
+		return reposRecipe.findById(id).orElseThrow(()-> new NotFoundException("Recipe Not Found! For ID value : "+id));
 	}
 
 }
