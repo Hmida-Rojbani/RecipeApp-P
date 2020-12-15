@@ -2,10 +2,12 @@ package de.tekup.recipe.services;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import de.tekup.recipe.data.entities.Recipe;
 import de.tekup.recipe.data.repositories.RecipeRepository;
+import de.tekup.recipe.dto.models.RecipeRequest;
 import de.tekup.recipe.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 
@@ -14,6 +16,7 @@ import lombok.AllArgsConstructor;
 public class RecipeServiceImpl implements RecipeService {
 	
 	private RecipeRepository reposRecipe;
+	private ModelMapper mapper;
 
 	@Override
 	public List<Recipe> getRecipes() {
@@ -29,6 +32,14 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public void deleteRecipe(long id) {
 		reposRecipe.deleteById(id);
+		
+	}
+
+	@Override
+	public void saveRecipeInDB(RecipeRequest request) {
+		Recipe recipe = mapper.map(request, Recipe.class);
+		
+		reposRecipe.save(recipe);
 		
 	}
 
