@@ -60,7 +60,7 @@
 					  	     <td th:text="${ingredient.amount}"> Taste Gooood </td>
 					  	     <td th:text="${ingredient.uom.description}"> Taste Gooood </td>
 					  	     <td> <a href="#">Update</a> 
-					  	     <td> <a href="#">Delete</a> 
+					  	     <td> <a href="#" th:href="@{'/recipe/'+${recipeId}+'/ingredient/'+${ingredient.id}+'/delete'}">Delete</a> 
 					  	</tr>
 					  </table>
 					 </div>
