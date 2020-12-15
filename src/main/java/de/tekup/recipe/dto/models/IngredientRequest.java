@@ -10,6 +10,8 @@ import lombok.Setter;
 @Getter@Setter
 public class IngredientRequest {
 	
+	private long id;
+	
 	@NotBlank
 	private String description;
 	@Positive

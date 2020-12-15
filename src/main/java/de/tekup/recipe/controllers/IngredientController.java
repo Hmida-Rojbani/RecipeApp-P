@@ -5,8 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import de.tekup.recipe.data.entities.Recipe;
+import de.tekup.recipe.dto.models.IngredientRequest;
+import de.tekup.recipe.dto.models.UnitOfMeasureRequest;
 import de.tekup.recipe.services.IngredientService;
 import de.tekup.recipe.services.RecipeService;
+import de.tekup.recipe.services.UnitOfMeasureService;
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -15,6 +19,7 @@ public class IngredientController {
 	
 	private RecipeService serviceRecipe;
 	private IngredientService serviceIngredient;
+	private UnitOfMeasureService serviceUom;
 	
 	@GetMapping("/recipe/{id}/ingredients")
 	public String showRecipeIngredients(@PathVariable("id") long id,
@@ -25,9 +30,24 @@ public class IngredientController {
 	}
 	
 	@GetMapping("/recipe/{recipeId}/ingredient/{id}/delete")
-	public String deleteRecipe(@PathVariable("recipeId") long recipeId,@PathVariable("id") long id) {
+	public String deleteIngredient(@PathVariable("recipeId") long recipeId,@PathVariable("id") long id) {
 		serviceIngredient.deleteIngredient(id);
 		return "redirect:/recipe/"+recipeId+"/ingredients";
+	}
+	
+	@GetMapping("/recipe/{recipeId}/ingredient/add")
+	public String newIngredient(@PathVariable("recipeId") long recipeId,Model model) {
+		//make sure we have a good id value
+		Recipe recipe = serviceRecipe.getRecipeById(recipeId);
+		// todo id not good
+		
+		//Add of ingredient
+		
+		IngredientRequest ingredientRequest = new IngredientRequest();
+		ingredientRequest.setUom(new UnitOfMeasureRequest());
+		model.addAttribute("ingredient", ingredientRequest);
+		model.addAttribute("uomList", serviceUom.getUnitOfMeasures());
+		return "recipe/ingredients/ingredientform";
 	}
 
 }
