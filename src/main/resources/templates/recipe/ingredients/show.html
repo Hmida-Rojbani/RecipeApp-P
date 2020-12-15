@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Show ingredients</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.5.1/jquery.min.js}">
+	
+</script>
+
+<script 
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+	<div class="container-fluid" style="margin-top: 20 px">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h1 class="panel-title"> Ingredients</h1>
+					</div>
+					<div class="panel-body">
+					 <div class="table-responsive" th:if="${not #lists.isEmpty(ingredients)}">
+					  <table class="table table-hover">
+					  	<thead class="thead-inverse">
+					  	<tr>  
+					  	    <th> ID </th>
+					  	    <th> Description </th>
+					  	    <th> Amount </th>
+					  	    <th> Unit Of Measure </th>
+					  	    <th> Update </th>
+					  	    <th> Delete </th>
+					  	</tr>	  	
+					  	</thead>
+					  	<tr th:remove="all">
+					  	     <td> 123 </td>
+					  	     <td> Salt</td>
+					  	     <td> 20</td>
+					  	     <td> Gram</td>
+					  	     <td> <a href="#">Update</a> 
+					  	     <td> <a href="#">Delete</a> 
+					  	</tr>
+					  	<tr th:remove="all">
+					  	     <td> 124 </td>
+					  	     <td> Taste Gooood </td>
+					  	     <td> <a href="#">View</a> 
+					  	     <td> <a href="#">Update</a> 
+					  	     <td> <a href="#">Delete</a> 
+					  	</tr>
+					  	<tr th:each="ingredient : ${ingredients}">
+					  	     <td th:text="${ingredient.id}"> 124 </td>
+					  	     <td th:text="${ingredient.description}"> Taste Gooood </td>
+					  	     <td th:text="${ingredient.amount}"> Taste Gooood </td>
+					  	     <td th:text="${ingredient.uom.description}"> Taste Gooood </td>
+					  	     <td> <a href="#">Update</a> 
+					  	     <td> <a href="#">Delete</a> 
+					  	</tr>
+					  </table>
+					 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
