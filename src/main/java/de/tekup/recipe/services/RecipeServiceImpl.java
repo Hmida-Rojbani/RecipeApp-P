@@ -26,4 +26,10 @@ public class RecipeServiceImpl implements RecipeService {
 		return reposRecipe.findById(id).orElseThrow(()-> new NotFoundException("Recipe Not Found! For ID value : "+id));
 	}
 
+	@Override
+	public void deleteRecipe(long id) {
+		reposRecipe.deleteById(id);
+		
+	}
+
 }

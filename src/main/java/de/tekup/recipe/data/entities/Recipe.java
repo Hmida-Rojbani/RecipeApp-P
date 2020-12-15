@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,7 +34,7 @@ public class Recipe {
 	@Lob
 	private String directions;
 	
-	@OneToMany(mappedBy = "recipe")
+	@OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
 	private Set<Ingredient> ingredients = new HashSet<>();
 	
 	@Enumerated(EnumType.STRING)
