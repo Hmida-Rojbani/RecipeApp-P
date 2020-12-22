@@ -6,8 +6,10 @@ import javax.validation.constraints.Positive;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter@Setter
+@ToString
 public class IngredientRequest {
 	
 	private long id;
@@ -18,5 +20,7 @@ public class IngredientRequest {
 	private Double amount;
 	@Valid
 	private UnitOfMeasureRequest uom;
+	
+	private Long recipeId;
 
 }

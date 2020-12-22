@@ -17,10 +17,12 @@ import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Data
 @EqualsAndHashCode(of ="id")
+@ToString(exclude = "ingredients")
 public class Recipe {
 	
 	@Id

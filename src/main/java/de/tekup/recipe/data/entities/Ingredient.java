@@ -13,7 +13,7 @@ import lombok.ToString;
 
 @Entity
 @Data
-@ToString(exclude = "recipe")
+@ToString
 @NoArgsConstructor
 public class Ingredient {
 	

@@ -3,7 +3,9 @@ package de.tekup.recipe.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import de.tekup.recipe.data.entities.Recipe;
 import de.tekup.recipe.dto.models.IngredientRequest;
@@ -44,10 +46,18 @@ public class IngredientController {
 		//Add of ingredient
 		
 		IngredientRequest ingredientRequest = new IngredientRequest();
+		ingredientRequest.setRecipeId(recipeId);
 		ingredientRequest.setUom(new UnitOfMeasureRequest());
 		model.addAttribute("ingredient", ingredientRequest);
 		model.addAttribute("uomList", serviceUom.getUnitOfMeasures());
 		return "recipe/ingredients/ingredientform";
+	}
+	
+	@PostMapping("/recipe/{recipeId}/ingredient")
+	public String saveOrUpdateIngredient(@PathVariable("recipeId") long recipeId,
+			@ModelAttribute("ingredient") IngredientRequest request) {
+		serviceIngredient.saveIngredient(request);
+		return "redirect:/recipe/"+request.getRecipeId()+"/ingredients";
 	}
 
 }
